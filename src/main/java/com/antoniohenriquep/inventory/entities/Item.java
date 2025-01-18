@@ -1,5 +1,6 @@
 package com.antoniohenriquep.inventory.entities;
 
+import com.antoniohenriquep.inventory.entities.enums.ItemStatus;
 import com.antoniohenriquep.inventory.entities.enums.ItemType;
 import jakarta.persistence.*;
 
@@ -14,8 +15,14 @@ public class Item {
 
     private String code;
     private String name;
+
     @Enumerated(EnumType.STRING)
     private ItemType type;
+
+    @Enumerated(EnumType.STRING)
+    private ItemStatus status;
+
+
 
     public Item() {}
 
