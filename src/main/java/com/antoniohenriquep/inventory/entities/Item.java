@@ -22,13 +22,19 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private ItemStatus status;
 
+    @ManyToOne
+    @JoinColumn(name = "grouping_id")
+    private Grouping grouping;
+
 
 
     public Item() {}
 
-    public Item(String code, String name) {
+    public Item(String code, String name, ItemType type) {
         this.code = code;
         this.name = name;
+        this.type = type;
+        this.status = ItemStatus.BACKUP;
     }
 
     public Long getId() {
@@ -49,6 +55,14 @@ public class Item {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public ItemType getType() {
+        return type;
+    }
+
+    public void setType(ItemType type) {
+        this.type = type;
     }
 
     @Override

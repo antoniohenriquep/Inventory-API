@@ -1,10 +1,8 @@
 package com.antoniohenriquep.inventory.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,6 +13,10 @@ public class Grouping {
     private Long id;
 
     private String name;
+
+    @OneToMany(mappedBy = "grouping")
+    private List<Item> items;
+
 
     public Grouping() {}
 
@@ -32,6 +34,14 @@ public class Grouping {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void addItems(Item item) {
+        items.add(item);
     }
 
     @Override
