@@ -1,6 +1,5 @@
 package com.antoniohenriquep.inventory.entities;
 
-import com.antoniohenriquep.inventory.Department;
 import jakarta.persistence.*;
 
 @Entity
