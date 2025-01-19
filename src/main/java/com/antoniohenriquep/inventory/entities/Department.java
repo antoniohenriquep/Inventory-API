@@ -1,6 +1,5 @@
-package com.antoniohenriquep.inventory;
+package com.antoniohenriquep.inventory.entities;
 
-import com.antoniohenriquep.inventory.entities.Localization;
 import jakarta.persistence.*;
 
 import java.util.List;
