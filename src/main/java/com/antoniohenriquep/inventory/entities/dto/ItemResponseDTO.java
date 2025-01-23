@@ -1,6 +1,6 @@
 package com.antoniohenriquep.inventory.entities.dto;
 
-public class ItemResponse {
+public class ItemResponseDTO {
     private Long id;
     private String name;
     private String description;
