@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/items")
@@ -20,9 +21,14 @@ public class ItemController {
     private ItemService itemService;
 
     @GetMapping
-    public ResponseEntity<List<Item>> findAll()
+    public ResponseEntity<List<ItemResponseDTO>> findAll()
     {
-        return ResponseEntity.ok(itemService.findAll());
+        List<ItemResponseDTO> items = itemService.findAll()
+                .stream()
+                .map(i -> ItemMapper.toDto(i))
+                .collect(Collectors.toList());
+
+        return new ResponseEntity(items, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
