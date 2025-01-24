@@ -4,10 +4,13 @@ import com.antoniohenriquep.inventory.entities.enums.ItemStatus;
 import com.antoniohenriquep.inventory.entities.enums.ItemType;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Objects;
 
+
 @Entity
-public class Item {
+
+public class Item implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,15 +29,41 @@ public class Item {
     @JoinColumn(name = "grouping_id")
     private Grouping grouping;
 
-
-
     public Item() {}
 
-    public Item(String code, String name, ItemType type) {
+    public Item(String code, String name) {
+        this.code = code;
+        this.name = name;
+        this.type = verifyType(name);
+        this.status = ItemStatus.BACKUP;
+    }
+
+    public Item(Long id, String code, String name, ItemType type, ItemStatus status, Grouping grouping) {
+        this.id = id;
         this.code = code;
         this.name = name;
         this.type = type;
-        this.status = ItemStatus.BACKUP;
+        this.status = status;
+        this.grouping = grouping;
+    }
+
+    private ItemType verifyType(String name)
+    {
+        if (name.contains("PRINTER") || name.contains("IMPRESSORA")) {
+            return ItemType.PRINTER;
+        } else if (name.contains("RADIOLOGY")) {
+            return ItemType.PRINTER_RADIOLOGY;
+        } else if (name.contains("DESKTOP") || name.contains("GABINETE")) {
+            return ItemType.DESKTOP;
+        } else if (name.contains("MONITOR")) {
+            return ItemType.MONITOR;
+        } else if (name.contains("STABILIZER") || name.contains("ESTABILIZADOR")) {
+            return ItemType.STABILIZER;
+        } else if (name.contains("NOTEBOOK")) {
+            return ItemType.NOTEBOOK;
+        }
+        else
+            throw new IllegalArgumentException("Invalid item type");
     }
 
     public Long getId() {
@@ -63,6 +92,14 @@ public class Item {
 
     public void setType(ItemType type) {
         this.type = type;
+    }
+
+    public ItemStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ItemStatus status) {
+        this.status = status;
     }
 
     @Override
