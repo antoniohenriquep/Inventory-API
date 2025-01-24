@@ -9,12 +9,18 @@ public class ItemMapper {
 
     public static Item toItem(ItemCreateDTO dto)
     {
-        return new ModelMapper().map(dto, Item.class);
+        return new Item(dto.getCode(), dto.getName());
     }
 
     public static ItemResponseDTO toDto(Item item)
     {
-        return new ModelMapper().map(item, ItemResponseDTO.class);
+        return new ItemResponseDTO(
+                item.getId(),
+                item.getCode(),
+                item.getName(),
+                item.getType().toString(),
+                item.getStatus().toString()
+        );
     }
 
 }
