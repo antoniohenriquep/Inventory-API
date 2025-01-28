@@ -29,6 +29,8 @@ public class Item implements Serializable {
     @JoinColumn(name = "grouping_id")
     private Grouping grouping;
 
+    private String registeredBy;
+
     public Item() {}
 
     public Item(String code, String name) {
@@ -38,13 +40,14 @@ public class Item implements Serializable {
         this.status = ItemStatus.BACKUP;
     }
 
-    public Item(Long id, String code, String name, ItemType type, ItemStatus status, Grouping grouping) {
+    public Item(Long id, String code, String name, ItemType type, ItemStatus status, Grouping grouping, String registeredBy) {
         this.id = id;
         this.code = code;
         this.name = name;
         this.type = type;
         this.status = status;
         this.grouping = grouping;
+        this.registeredBy = registeredBy;
     }
 
     private ItemType verifyType(String name)
