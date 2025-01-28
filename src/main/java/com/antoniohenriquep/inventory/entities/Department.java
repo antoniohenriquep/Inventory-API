@@ -2,6 +2,7 @@ package com.antoniohenriquep.inventory.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,6 +16,9 @@ public class Department {
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Localization> localizations;
+
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
+    private List<Grouping> groupings = new ArrayList<>();
 
     public Department() {}
 

@@ -17,6 +17,10 @@ public class Grouping {
     @OneToMany(mappedBy = "grouping")
     private List<Item> items;
 
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+
 
     public Grouping() {}
 
